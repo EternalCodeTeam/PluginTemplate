@@ -4,14 +4,14 @@ plugins {
     id "groovy"
 }
 
-group "com.vluckyyy.plugintemplate"
+group "com.eternalcode.plugintemplate"
 version "1.0.1-SNAPSHOT"
 
 repositories {
     gradlePluginPortal()
     mavenCentral()
-    maven { url "https://papermc.io/repo/repository/maven-public/" }
-    maven { url "https://repo.panda-lang.org/releases" }
+    maven { url = "https://papermc.io/repo/repository/maven-public/" }
+    maven { url = "https://repo.panda-lang.org/releases" }
 }
 
 dependencies {
@@ -26,8 +26,11 @@ dependencies {
     // paper api
     compileOnly "io.papermc.paper:paper-api:1.18.1-R0.1-SNAPSHOT"
 
-    // funnycommands
-    implementation "net.dzikoysk:funnycommands:0.4.2"
+    // LiteCommands
+    implementation "dev.rollczi.litecommands:bukkit:1.5.1"
+
+    // cdn configs
+    implementation "net.dzikoysk:cdn:1.13.5"
 
     // expresslibe
     implementation "org.panda-lang:expressible:1.1.12"
@@ -35,18 +38,25 @@ dependencies {
     // tests
     testImplementation "io.papermc.paper:paper-api:1.18.1-R0.1-SNAPSHOT"
     testImplementation "org.codehaus.groovy:groovy-all:3.0.9"
-    testImplementation "org.junit.jupiter:junit-jupiter-api:5.8.2"
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
 }
 
 test { useJUnitPlatform() }
 java { toolchain.languageVersion.set(JavaLanguageVersion.of(17)) }
 
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+    options.release.set(17)
+}
+
 shadowJar {
-    archiveFileName = "PluginTemplate-v${project.version}.jar"
+    archiveFileName = "PluginTemplate v${project.version}.jar"
 
     exclude "org/intellij/lang/annotations/**"
     exclude "org/jetbrains/annotations/**"
     exclude "javax/**"
 
+    relocate "net.dzikoysk", "com.eternalcode.plugintemplate.libs.net.dzikoysk"
+    relocate "dev.rollczi", "com.eternalcode.plugintemplate.libs.dev.rollczi"
     relocate "org.panda_lang", "com.eternalcode.plugintemplate.libs.panda"
 }
