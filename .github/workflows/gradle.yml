@@ -31,4 +31,4 @@ jobs:
                 uses: actions/upload-artifact@v2.2.4
                 with:
                     name: "🔨 Successfully build with JDK${{ matrix.jdk }}"
-                    path: "build/libs/EternalCore*.jar"
+                    path: "build/libs/*.jar"
