@@ -35,7 +35,7 @@ dependencies {
     implementation("net.dzikoysk:cdn:1.13.17")
 
     // expressible
-    implementation("org.panda-lang:expressible:1.1.17")
+    implementation("org.panda-lang:expressible:1.1.19")
 
     // tests
     testImplementation("io.papermc.paper:paper-api:1.18.1-R0.1-SNAPSHOT")
